@@ -4,5 +4,6 @@
       "name": "spring.flyway.locations.classpath",
       "type": "java.lang.String",
       "description": "Description for spring.flyway.locations.classpath."
-  }
-] }
+    }
+
+  ] }
