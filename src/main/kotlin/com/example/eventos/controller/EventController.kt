@@ -16,8 +16,9 @@ class EventController {
     lateinit var eventService: EventService
 
     @GetMapping
-    fun list():List<Event>{
-        return eventService.list()
+    fun list (event: Event, pageable: Pageable):ResponseEntity<*>{
+        val response= eventService.list(pageable, event)
+        return ResponseEntity(response, HttpStatus.OK)
     }
 
     @PostMapping
@@ -35,10 +36,6 @@ class EventController {
         return ResponseEntity(eventService.updateName(event), HttpStatus.OK)
     }
 
-    @GetMapping
-    fun list (event: Event, pageable: Pageable):ResponseEntity<*>{
-        val response= eventService.list(pageable, event)
-        return ResponseEntity(response, HttpStatus.OK)
-    }
+
 
 }

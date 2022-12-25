@@ -19,8 +19,9 @@ class ConferenceController {
     lateinit var conferenceService: ConferenceService
 
     @GetMapping
-    fun list():List<Conference>{
-        return conferenceService.list()
+    fun list (conference: Conference, pageable: Pageable): ResponseEntity<*> {
+        val response= conferenceService.list(pageable, conference)
+        return ResponseEntity(response, HttpStatus.OK)
     }
 
     @PostMapping
@@ -38,9 +39,5 @@ class ConferenceController {
         return ResponseEntity(conferenceService.updateName(conference), HttpStatus.OK)
     }
 
-    @GetMapping
-    fun list (conference: Conference, pageable: Pageable): ResponseEntity<*> {
-        val response= conferenceService.list(pageable, conference)
-        return ResponseEntity(response, HttpStatus.OK)
-    }
+
 }

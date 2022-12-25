@@ -18,8 +18,9 @@ class MemberController {
     lateinit var memberService: MemberService
 
     @GetMapping
-    fun list():List<Member>{
-        return memberService.list()
+    fun list (member: Member, pageable: Pageable): ResponseEntity<*> {
+        val response= memberService.list(pageable, member)
+        return ResponseEntity(response, HttpStatus.OK)
     }
 
     @PostMapping
@@ -37,9 +38,5 @@ class MemberController {
         return ResponseEntity(memberService.updateName(member), HttpStatus.OK)
     }
 
-    @GetMapping
-    fun list (member: Member, pageable: Pageable): ResponseEntity<*> {
-        val response= memberService.list(pageable, member)
-        return ResponseEntity(response, HttpStatus.OK)
-    }
+
 }

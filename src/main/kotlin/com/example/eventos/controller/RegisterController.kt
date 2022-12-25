@@ -18,8 +18,9 @@ class RegisterController {
     lateinit var registerService: RegisterService
 
     @GetMapping
-    fun list():List<Register>{
-        return registerService.list()
+    fun list (register: Register, pageable: Pageable): ResponseEntity<*> {
+        val response= registerService.list(pageable, register)
+        return ResponseEntity(response, HttpStatus.OK)
     }
 
     @PostMapping
@@ -37,9 +38,5 @@ class RegisterController {
         return ResponseEntity(registerService.updateName(register), HttpStatus.OK)
     }
 
-    @GetMapping
-    fun list (register: Register, pageable: Pageable): ResponseEntity<*> {
-        val response= registerService.list(pageable, register)
-        return ResponseEntity(response, HttpStatus.OK)
-    }
+
 }
